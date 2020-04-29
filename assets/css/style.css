@@ -1,0 +1,63 @@
+.header {
+	background-color: #343a40;
+	color: white;
+}
+
+.search-bar {
+	margin-right: 10px;
+	border-radius: 6px;
+
+}
+
+.search {
+	border-radius: 8px;
+	margin-top: 20px
+}
+
+.search-label {
+	font-size: 18px;
+}
+
+.search-btn {
+	font-size: 16px;
+}
+
+.artist-image {
+	display: block;
+	margin-left: auto;
+  	margin-right: auto;
+  	width: 50%;
+}
+
+.list {
+	padding: 20px;
+}
+
+li {
+	margin: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	
+}
+
+.biography {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.playlist-card {
+	border: none;
+}
+
+.play-playlist {
+	width: 15%;
+/*	margin-right: auto;*/
+	display: block;
+	margin: 10px auto;
+	border-radius: 4px;
+}
+
+.play-playlist:hover {
+	background-color: blue;
+}
