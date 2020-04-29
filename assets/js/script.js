@@ -1,29 +1,59 @@
 var formSubmitEl = document.querySelector("#form-submit");
 var artistSearchEl = document.querySelector("#artist-search");
+var similarArtistsEl = document.querySelector("#similar-artists")
+var apiKey = "702756dd5f8715a1c44e2754d353c270"
 
-var testFunction = function() {
+//
+var artistSearch = function(artist) {
     //Prevent page from reloading
     event.preventDefault();
 
     //Set search term value to variable
-    var artist = artistSearchEl.value;
+    var input = artistSearchEl.value;
+
+    //Correction API call for right artist name in case of mispells
+    var nameCorrectionApi = "https://ws.audioscrobbler.com/2.0/?method=artist.getcorrection&artist=" 
+    + input + 
+    "&api_key=" 
+    + apiKey + 
+    "&format=json";
+
+    //API Call
+    fetch(nameCorrectionApi).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data){
+                var artist = data.corrections.correction.artist.name;
+
+                ApiCall(artist);
+            })
+        } else {
+            alert("Error:" + response.statusText);
+        }
+    })
+};
+
+var ApiCall = function(artist) {
 
     //Artist search API set to variable
-    var artistSearchApi = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="
+    var artistInfoApi = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="
     + artist +
-    "&api_key=702756dd5f8715a1c44e2754d353c270&format=json"
+    "&api_key="
+    + apiKey +
+    "&format=json"
 
     //Top tracks of artist searched, API set to variable
     var topTracksApi = "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="
      + artist + 
-    "&api_key=702756dd5f8715a1c44e2754d353c270&format=json";
+    "&api_key="
+    + apiKey +
+    "&format=json";
+
+    var audioDbApi = "https://theaudiodb.com/api/v1/json/1/search.php?s=" + artist;
 
     //Search result brings up artist, items in response include picture, bio, and similar artists
-    fetch(artistSearchApi).then(function (response) {
+    fetch(artistInfoApi).then(function (response) {
         response.json().then(function (data) {
             console.log(data);
-            //Find another API for image search for the artist
-            // console.log(data.artist.image[1]["#text"]);
 
             //Testting removing <a> from bio string
             var bioString = data.artist.bio.summary;
@@ -32,8 +62,6 @@ var testFunction = function() {
             
             //Artist name implemented to page
             $("#artist-name").text(data.artist.name);
-            //Artist image (TBD) implemented to the page
-            $("#artist-pic").attr("src", data.artist.image[1]["#text"])
             //First item from bio Array 
             $("#artist-bio").text(bioArr[0]);
 
@@ -52,7 +80,7 @@ var testFunction = function() {
         response.json().then(function(data) {
             console.log(data);
 
-            // console.log(data.toptracks.track[0].name, data.toptracks.track[1].name)
+            console.log(data.toptracks.track[0].mbid)
 
             //Top 5 Tracks added to list
             $("#top-track-one").text(data.toptracks.track[0].name);
@@ -60,13 +88,62 @@ var testFunction = function() {
             $("#top-track-three").text(data.toptracks.track[2].name);
             $("#top-track-four").text(data.toptracks.track[3].name);
             $("#top-track-five").text(data.toptracks.track[4].name);
+
+            simTracksApiHandler(data.toptracks.track[0].mbid);
         })
-    })
-    
+    });
+
+
+
+    //Calls TheAudioDB for images
+    fetch(audioDbApi).then(function (response) {
+        response.json().then(function(data) {
+            console.log(data.artists[0]);
+
+            console.log(data.artists[0].strArtistThumb);
+            console.log(data.artists[0].strArtistLogo);
+
+            $("#artist-pic").attr("src", data.artists[0].strArtistThumb);
+            $("#artist-logo").attr("src", data.artists[0].strArtistLogo);
+        })
+    });
+
+    //Clear search form
     $(artistSearchEl).val("");
 
 }
 
+var simTracksApiHandler = function (mbid) {
+
+    var tracksApi = "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&mbid="
+    + mbid + "&api_key="
+    + apiKey +
+    "&format=json"
+
+    fetch(tracksApi).then(function(response) {
+        response.json().then(function(data){
+
+            console.log(data);
+
+            $("#sim-trk-one").text(data.similartracks.track[0].name);
+            $("#sim-trk-two").text(data.similartracks.track[1].name);
+            $("#sim-trk-three").text(data.similartracks.track[2].name);
+            $("#sim-trk-four").text(data.similartracks.track[3].name);
+            $("#sim-trk-five").text(data.similartracks.track[4].name);
+        })
+    })
+}
+
+var callBack = function (event) {
+
+    event.preventDefault();
+
+    var artist = event.target.innerHTML;
+
+    ApiCall(artist);
+
+}
 
 
-formSubmitEl.addEventListener("submit", testFunction);
+formSubmitEl.addEventListener("submit", artistSearch);
+similarArtistsEl.addEventListener("click", callBack);
