@@ -52,31 +52,36 @@ var ApiCall = function(artist) {
 
     //Search result brings up artist, items in response include picture, bio, and similar artists
     fetch(artistInfoApi).then(function (response) {
-        response.json().then(function (data) {
-            console.log(data);
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
 
-            //Testting removing <a> from bio string
-            var bioString = data.artist.bio.summary;
-            //Bio summary is split into an array, separating the anchor tag from the summary.
-            var bioArr = bioString.split('<a');
-            
-            //Artist name implemented to page
-            $("#artist-name").text(data.artist.name);
-            //First item from bio Array 
-            $("#artist-bio").text(bioArr[0]);
+                //Removing <a> from bio string
+                var bioString = data.artist.bio.summary;
+                //Bio summary is split into an array, separating the anchor tag from the summary.
+                var bioArr = bioString.split('<a');
+                
+                //Artist name implemented to page
+                $("#artist-name").text(data.artist.name);
+                //First item from bio Array 
+                $("#artist-bio").text(bioArr[0]);
 
-            //Adding similar artist to a list
-            $("#sim-art-one").text(data.artist.similar.artist[0].name);
-            $("#sim-art-two").text(data.artist.similar.artist[1].name);
-            $("#sim-art-three").text(data.artist.similar.artist[2].name);
-            $("#sim-art-four").text(data.artist.similar.artist[3].name);
-            $("#sim-art-five").text(data.artist.similar.artist[4].name);
+                //Adding similar artist to a list
+                $("#sim-art-one").text(data.artist.similar.artist[0].name);
+                $("#sim-art-two").text(data.artist.similar.artist[1].name);
+                $("#sim-art-three").text(data.artist.similar.artist[2].name);
+                $("#sim-art-four").text(data.artist.similar.artist[3].name);
+                $("#sim-art-five").text(data.artist.similar.artist[4].name);
 
-        })
+        })} 
+        else {
+            alert("Error:" + response.statusText)
+    }
     });
 
     //Top tracks search brings up top 40 tracks for each search, determine how many results we should display
     fetch(topTracksApi).then(function (response) {
+        if (response.ok) {
         response.json().then(function(data) {
             console.log(data);
 
@@ -90,23 +95,31 @@ var ApiCall = function(artist) {
             $("#top-track-five").text(data.toptracks.track[4].name);
 
             simTracksApiHandler(data.toptracks.track[0].mbid);
-        })
+        })}
+        else {
+            alert("Error:" + response.statusText)
+        }
     });
 
 
 
     //Calls TheAudioDB for images
     fetch(audioDbApi).then(function (response) {
-        response.json().then(function(data) {
-            console.log(data.artists[0]);
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data);
 
-            console.log(data.artists[0].strArtistThumb);
-            console.log(data.artists[0].strArtistLogo);
-
-            $("#artist-pic").attr("src", data.artists[0].strArtistThumb);
+                if (data.artists[0].strArtistThumb === null) {
+                    $("#artist-pic").attr("src", "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png");
+                } else {
+                    $("#artist-pic").attr("src", data.artists[0].strArtistThumb);
+                }
             $("#artist-logo").attr("src", data.artists[0].strArtistLogo);
-        })
-    });
+        })}
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
 
     //Clear search form
     $(artistSearchEl).val("");
