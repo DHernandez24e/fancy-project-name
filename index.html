@@ -15,9 +15,9 @@
     <h2 class = "text-center header">Artist Find and Playlist Creater</h2>
     <div class = "row">
     <div class = "search card columns medium-4">
-      <form>
+      <form id="form-submit">
         <label for = "search-bar" class = "search-label"><strong>Search your artist's name:</strong></label>
-        <input type = "text" name = "search-bar" class = "search-bar" placeholder = "Artist name">
+        <input id="artist-search" type = "text" name = "search-bar" class = "search-bar" placeholder = "Artist name">
         <button type = "submit" class = "search-btn success button">Search</button>
       </form>
       <div class = "search-history">
@@ -41,21 +41,21 @@
       </div>
     </div>
     <div class = "columns medium-8">
-      <img src = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2020%2F03%2F30%2FGettyImages-1172292629.jpg" alt = "IT DIDN'T WORK" width = "600" height = "auto" class = "artist-image">
+      <img id="artist-pic" src = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2020%2F03%2F30%2FGettyImages-1172292629.jpg" alt = "IT DIDN'T WORK" width = "600" height = "auto" class = "artist-image">
       <div class = "card bio-card">
         <h5 class = "card-divider">Biography:</h5>
-        <p class = "biography">
+        <p id="artist-bio" class = "biography">
           Born Aubrey Drake Graham on October 24, 1986, in Toronto, Canada, Drake grew up with music in his blood. His father, Dennis Graham, was a drummer for the legendary rock 'n'  roll star Jerry Lee Lewis. An uncle, Larry Graham, played bass for Sly and the Family Stone. Drake says that his mother, Sandi Graham, also hails from a "very musical" family — his grandmother babysat Aretha Franklin. Drake comes from an eclectic and unique ethnic and religious background. His father is an African American Catholic and his mother is a white Canadian Jew. Speaking about his personal identity, Drake says: "At the end of the day, I consider myself a black man because I'm more immersed in black culture than any other. Being Jewish is kind of a cool twist. It makes me unique."
         </p>
     </div>
       <div class = "card top-songs">
         <h5 class = "card-divider">Top Songs:</h5>
         <ul class = "no-bullet list">
-          <li>Toosie Slide</li>
-          <li>God's Plan</li>
-          <li>Life is Good</li>
-          <li>Hotline Bling</li>
-          <li>Nice for What</li>
+          <li id="top-track-one">Toosie Slide</li>
+          <li id="top-track-two">God's Plan</li>
+          <li id="top-track-three">Life is Good</li>
+          <li id="top-track-four">Hotline Bling</li>
+          <li id="top-track-five">Nice for What</li>
         </ul>
     </div>
   </div>

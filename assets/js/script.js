@@ -4,7 +4,7 @@ var similarArtistsEl = document.querySelector("#similar-artists")
 var apiKey = "702756dd5f8715a1c44e2754d353c270"
 
 //
-var artistSearch = function(artist) {
+var artistSearch = function(input) {
     //Prevent page from reloading
     event.preventDefault();
 
@@ -146,4 +146,4 @@ var callBack = function (event) {
 
 
 formSubmitEl.addEventListener("submit", artistSearch);
-similarArtistsEl.addEventListener("click", callBack);
+// similarArtistsEl.addEventListener("click", callBack);
