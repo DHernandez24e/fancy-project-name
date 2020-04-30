@@ -181,6 +181,31 @@ var loadSearchHistory = function() {
     };
 };
 
+//Each button has a corresponding function, I just <p>, as a test to see where the information was going when the button was clicked
+
+$(document).ready(function() {
+
+    $("#1").click(function(){
+        $("p").append(x);
+      });
+
+    $("#2").click(function(){
+        $("p").append(" <b>Appended text</b>.");
+      });
+
+    $("#3").click(function(){
+        $("p").append(" <b>Appended text</b>.");
+      });
+    
+    $("#4").click(function(){
+        $("p").append(" <b>Appended text</b>.");
+      });
+
+    $("#5").click(function(){
+        $("p").append(" <b>Appended text</b>.");
+      });
+  });
+
 
 formSubmitEl.addEventListener("submit", artistSearch);
 pastSearchEl.addEventListener("click", callBack);
