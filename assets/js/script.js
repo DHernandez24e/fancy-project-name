@@ -109,12 +109,12 @@ var ApiCall = function(artist) {
             response.json().then(function(data) {
                 console.log(data);
 
-                if (data.artists[0].strArtistThumb === null) {
+                if (data.artists[0].strArtistThumb === null || data.artists[0] === null) {
                     $("#artist-pic").attr("src", "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png");
                 } else {
                     $("#artist-pic").attr("src", data.artists[0].strArtistThumb);
                 }
-            $("#artist-logo").attr("src", data.artists[0].strArtistLogo);
+            // $("#artist-logo").attr("src", data.artists[0].strArtistLogo);
         })}
         else {
             alert("Error:" + response.statusText);
