@@ -1,6 +1,6 @@
 var formSubmitEl = document.querySelector("#form-submit");
 var artistSearchEl = document.querySelector("#artist-search");
-var similarArtistsEl = document.querySelector("#similar-artists")
+var pastSearchEl = document.querySelector("#past-search")
 var apiKey = "702756dd5f8715a1c44e2754d353c270"
 
 //
@@ -25,6 +25,7 @@ var artistSearch = function(input) {
                 var artist = data.corrections.correction.artist.name;
 
                 ApiCall(artist);
+                pastSearchHandler(artist);
             })
         } else {
             alert("Error:" + response.statusText);
@@ -126,6 +127,14 @@ var ApiCall = function(artist) {
 
 }
 
+var pastSearchHandler = function(artist) {
+   var searchItem = $("<td>").text(artist);
+
+    $("<tr>").append(searchItem).appendTo("#past-search")
+
+
+}
+
 var simTracksApiHandler = function (mbid) {
 
     var tracksApi = "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&mbid="
@@ -159,4 +168,4 @@ var callBack = function (event) {
 
 
 formSubmitEl.addEventListener("submit", artistSearch);
-// similarArtistsEl.addEventListener("click", callBack);
+pastSearchEl.addEventListener("click", callBack);
