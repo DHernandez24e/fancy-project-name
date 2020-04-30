@@ -69,12 +69,12 @@ var ApiCall = function(artist) {
                 //First item from bio Array 
                 $("#artist-bio").text(bioArr[0]);
 
-                //Adding similar artist to a list
-                $("#sim-art-one").text(data.artist.similar.artist[0].name);
-                $("#sim-art-two").text(data.artist.similar.artist[1].name);
-                $("#sim-art-three").text(data.artist.similar.artist[2].name);
-                $("#sim-art-four").text(data.artist.similar.artist[3].name);
-                $("#sim-art-five").text(data.artist.similar.artist[4].name);
+                // //Adding similar artist to a list
+                // $("#sim-art-one").text(data.artist.similar.artist[0].name);
+                // $("#sim-art-two").text(data.artist.similar.artist[1].name);
+                // $("#sim-art-three").text(data.artist.similar.artist[2].name);
+                // $("#sim-art-four").text(data.artist.similar.artist[3].name);
+                // $("#sim-art-five").text(data.artist.similar.artist[4].name);
 
         })} 
         else {
