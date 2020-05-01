@@ -182,27 +182,88 @@ var loadSearchHistory = function() {
 };
 
 //Each button has a corresponding function, I just <p>, as a test to see where the information was going when the button was clicked
-
+var songName;
+var localStorageList;
 $(document).ready(function() {
 
     $("#1").click(function(){
-        $("p").append(x);
+        var index = parseInt($(this).attr("id"))
+        songName = $(".top-track-list").eq(index - 1).text();
+        if (localStorage.getItem("songsToAdd") == null) {
+            localStorageList = [songName]
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+        } else {
+            localStorageListStr = localStorage.getItem("songsToAdd");
+            localStorageList = JSON.parse(localStorageListStr)
+            localStorageList.push(songName);
+            localStorage.removeItem("songsToAdd")
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+
+        }
       });
 
     $("#2").click(function(){
-        $("p").append(" <b>Appended text</b>.");
+        var index = parseInt($(this).attr("id"))
+        songName = $(".top-track-list").eq(index - 1).text();
+        if (localStorage.getItem("songsToAdd") == null) {
+            localStorageList = [songName]
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+        } else {
+            localStorageListStr = localStorage.getItem("songsToAdd");
+            localStorageList = JSON.parse(localStorageListStr)
+            localStorageList.push(songName);
+            localStorage.removeItem("songsToAdd")
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+
+        }
       });
 
     $("#3").click(function(){
-        $("p").append(" <b>Appended text</b>.");
+        var index = parseInt($(this).attr("id"))
+        songName = $(".top-track-list").eq(index - 1).text();
+        if (localStorage.getItem("songsToAdd") == null) {
+            localStorageList = [songName]
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+        } else {
+            localStorageListStr = localStorage.getItem("songsToAdd");
+            localStorageList = JSON.parse(localStorageListStr)
+            localStorageList.push(songName);
+            localStorage.removeItem("songsToAdd")
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+
+        }
       });
     
     $("#4").click(function(){
-        $("p").append(" <b>Appended text</b>.");
+        var index = parseInt($(this).attr("id"))
+        songName = $(".top-track-list").eq(index - 1).text();
+        if (localStorage.getItem("songsToAdd") == null) {
+            localStorageList = [songName]
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+        } else {
+            localStorageListStr = localStorage.getItem("songsToAdd");
+            localStorageList = JSON.parse(localStorageListStr)
+            localStorageList.push(songName);
+            localStorage.removeItem("songsToAdd")
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+
+        }
       });
 
     $("#5").click(function(){
-        $("p").append(" <b>Appended text</b>.");
+        var index = parseInt($(this).attr("id"))
+        songName = $(".top-track-list").eq(index - 1).text();
+        if (localStorage.getItem("songsToAdd") == null) {
+            localStorageList = [songName]
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+        } else {
+            localStorageListStr = localStorage.getItem("songsToAdd");
+            localStorageList = JSON.parse(localStorageListStr)
+            localStorageList.push(songName);
+            localStorage.removeItem("songsToAdd")
+            localStorage.setItem("songsToAdd", JSON.stringify(localStorageList))
+
+        }
       });
   });
 
