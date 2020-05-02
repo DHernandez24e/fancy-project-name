@@ -1,6 +1,7 @@
 var formSubmitEl = document.querySelector("#form-submit");
 var artistSearchEl = document.querySelector("#artist-search");
 var pastSearchEl = document.querySelector("#past-search");
+var similarArtistsEl = document.querySelector("#similar-artists")
 var apiKey = "702756dd5f8715a1c44e2754d353c270";
 var historyArr = [];
 
@@ -209,5 +210,6 @@ $(document).ready(function() {
 
 formSubmitEl.addEventListener("submit", artistSearch);
 pastSearchEl.addEventListener("click", callBack);
+similarArtistsEl.addEventListener("click", callBack);
 
 loadSearchHistory();
