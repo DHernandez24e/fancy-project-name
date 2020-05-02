@@ -5,7 +5,7 @@ var similarArtistsEl = document.querySelector("#similar-artists")
 var apiKey = "702756dd5f8715a1c44e2754d353c270";
 var historyArr = [];
 
-//
+//Handles user input
 var artistSearch = function(input) {
     //Prevent page from reloading
     event.preventDefault();
@@ -13,7 +13,7 @@ var artistSearch = function(input) {
     //Set search term value to variable
     var input = artistSearchEl.value;
 
-    //Correction API call for right artist name in case of mispells
+    //Correction API for right artist name in case of mispells
     var nameCorrectionApi = "https://ws.audioscrobbler.com/2.0/?method=artist.getcorrection&artist=" 
     + input + 
     "&api_key=" 
@@ -35,24 +35,27 @@ var artistSearch = function(input) {
     })
 };
 
+//Handles API calls for artist information
 var ApiCall = function(artist) {
 
+    //Shows elements on page
     $("#artist-main").removeClass("hide")
 
-    //Artist search API set to variable
+    //Artist info API, set to variable
     var artistInfoApi = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="
     + artist +
     "&api_key="
     + apiKey +
     "&format=json"
 
-    //Top tracks of artist searched, API set to variable
+    //Top tracks of artist API, set to variable
     var topTracksApi = "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="
      + artist + 
     "&api_key="
     + apiKey +
     "&format=json";
 
+    //The AudioDB API, used for images
     var audioDbApi = "https://theaudiodb.com/api/v1/json/1/search.php?s=" + artist;
 
     //Search result brings up artist, items in response include picture, bio, and similar artists
@@ -70,7 +73,8 @@ var ApiCall = function(artist) {
                 //First item from bio Array 
                 $("#artist-bio").text(bioArr[0]);
 
-                //Adding similar artist to a list
+                //Adding similar artist to a list, implemented to page.
+                //Artist's name can be clicked and will search information for said artist
                 $("#sim-art-one").text(data.artist.similar.artist[0].name);
                 $("#sim-art-two").text(data.artist.similar.artist[1].name);
                 $("#sim-art-three").text(data.artist.similar.artist[2].name);
@@ -83,7 +87,7 @@ var ApiCall = function(artist) {
     }
     });
 
-    // Top tracks search brings up top 40 tracks for each search, determine how many results we should display
+    // Top tracks search brings up top 40 tracks for each search, shortened to 5 tracks
     fetch(topTracksApi).then(function (response) {
         if (response.ok) {
         response.json().then(function(data) {
@@ -103,11 +107,12 @@ var ApiCall = function(artist) {
 
 
 
-    //Calls TheAudioDB for images
+    //Calls TheAudioDB API for images
     fetch(audioDbApi).then(function (response) {
         if (response.ok) {
             response.json().then(function(data) {
 
+                //If API does not have an image or info on artist, sets a placeholder image.
                 if (data.artists === null || data.artists[0].strArtistThumb === null) {
                     $("#artist-pic").attr("src", "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png");
                 } else {
@@ -125,15 +130,18 @@ var ApiCall = function(artist) {
 
 }
 
+//Handles past searches
 var pastSearchHandler = function(artist) {
-   var searchItem = $("<td>").text(artist);
 
+    //Create element to store item on page
+    var searchItem = $("<td>").text(artist);
     $("<tr>").append(searchItem).appendTo("#past-search");
 
+    //Pushes artist name to array for storage
     historyArr.push(artist);
-
+    
+    //Call for localStorage to store array values
     localStorage.setItem("artist", JSON.stringify(historyArr));
-
 };
 
 // var simTracksApiHandler = function (mbid) {
@@ -157,25 +165,34 @@ var pastSearchHandler = function(artist) {
 //     })
 // }
 
+//Handles click events for history items and similar artists
 var callBack = function (event) {
 
+    //Prevent page from reloading
     event.preventDefault();
 
+    //Sets HTML value to variable from clicked element
     var artist = event.target.innerHTML;
 
+    //Sets artist clicked as argument for API function
     ApiCall(artist);
-
 };
 
+//Loads previous searches on page load
 var loadSearchHistory = function() {
+
+    //Sets localStorage items to variable
     var searchResults = localStorage.getItem("artist");
 
+    //If no items in localStorage, ends function
     if (!searchResults) {
         return false;
     };
 
+    //Parse localStorage values, sets back to array
     historyArr = JSON.parse(searchResults);
 
+    //Loop creates elements based on array length
     for (var i = 0; i < historyArr.length; i++) {
         var searchItem = $("<td>").text(historyArr[i]);
         $("<tr>").append(searchItem).appendTo("#past-search");
