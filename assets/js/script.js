@@ -224,6 +224,23 @@ $(document).ready(function() {
       });
   });
 
+//Makes playlist adjustable change top tracks 
+
+$( function() {
+  $( "#sortable" ).sortable();
+  $( "#sortable" ).disableSelection();
+
+});
+
+//saves to local storage
+
+var ar = []
+ar = document.getElementById("sortable").getElementsByTagName("li");
+
+for(i = 0; i < ar.length; i++){
+  localStorage.setItem("tracks", JSON.stringify(($(ar[i]).text())));
+}
+
 
 formSubmitEl.addEventListener("submit", artistSearch);
 pastSearchEl.addEventListener("click", callBack);
