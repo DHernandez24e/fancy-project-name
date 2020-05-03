@@ -3,7 +3,20 @@ var artistSearchEl = document.querySelector("#artist-search");
 var pastSearchEl = document.querySelector("#past-search");
 var apiKey = "702756dd5f8715a1c44e2754d353c270";
 var historyArr = [];
+var heroImg = 0;
+showHero();
 
+function showHero() {
+    var index;
+    var heroImgs = document.getElementsByClassName("hero-img-div");
+    for (i = 0; i < heroImgs.length; i++) {
+        heroImgs[i].style.display = "none";
+    }
+    heroImg++;
+    if (heroImg > heroImgs.length) {heroImg = 1}
+    heroImgs[heroImg-1].style.display = "block";
+    setTimeout(showHero, 5000); // Change image every 2 seconds
+}
 //
 var artistSearch = function(input) {
     //Prevent page from reloading
