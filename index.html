@@ -15,6 +15,12 @@
     <ul id = "nav-ul">
       <h2 id = "header">Artist Find and Playlist Creator</h2>
       <li class = "nav-li">
+
+        <div class="tooltip">Hover over me
+          <span class="tooltiptext">Tooltip text</span>
+        </div>
+      </li>
+      <li class = "nav-li">
         <a href="#top-tracks">Top Tracks</a>
       </li>
       <li class = "nav-li">
@@ -22,6 +28,9 @@
       </li>
       <li class = "nav-li">
         <a href="#search">Search</a>
+      </li>
+      <li class = "nav-li">
+        <button id = "login-nav">Login</button>
       </li>
     </ul>
     <div class="hero-container">
@@ -43,12 +52,46 @@
       </div>
     </div>
     <br>
-    
+    <div id = "modal-login" class = "modal-login">
+      <div id = "modal-login-form">
+        <span class = "exit">&times;</span>
+        <form>
+          <label for="username" class = "account-label">Username: </label>
+          <input type = "text" placeholder = "Username" id = "username-box-login" name = "username" class = "search-bar">
+          <label for="password" class = "account-label">Password: </label>
+          <input type = "password" id = "password-box-login" placeholder = "Password" name = "password" class = "search-bar">
+          <p id = "wrong-password" class = "error">Password or username incorrect</p>
+          <button type = "submit" class = "button" id = "login">Login</button>
+          <button class = "button" id = "create-account">Create Account</button>
+        </form>
+      </div>
+    </div>
+    <div id = "modal-create" class = "modal-create">
+      <div id = "modal-create-form">
+        <span class = "exit">&times;</span>
+        <form>
+          <label for="firstname" class = "account-label">First Name: </label>
+          <input type = "text" placeholder = "First name" name = "firstname" id = "firstname-create" class = "search-bar">
+          <label for="lastname" class = "account-label">Last Name: </label>
+          <input type = "text" placeholder = "Last name" id = "lastname-create" name = "lastname" class = "search-bar">
+          <label for="username" class = "account-label">Username: </label>
+          <input type = "text" id = "username-box-create" placeholder = "Username" name = "username" class = "search-bar">
+          <p id = "username-taken" class = "error">Username already taken</p>
+          <label for="password" class = "account-label">Password: </label>
+          <input type = "password" id = "password-box-create" placeholder = "Password" name = "password" class = "search-bar">
+          <label for="confirm-password" class = "account-label">Confirm Password: </label>
+          <input type = "password" id = "confirm-password-box-create" placeholder = "Password" name = "confirm-password" class = "search-bar">
+          <p id = "confirm-password-not-same" class= "error">Confirmed password not same as first password</p>
+          <button class = "button" id = "create-account-create-modal" >Create Account</button>
+
+        </form>
+      </div>
+    </div>
     
     <div class = "row">
     <div class = "search card columns medium-4">
       <form id="form-submit">
-        <label for = "search-bar" class = "search-label"><strong>Search your artist's name:</strong></label>
+        <label for = "search-bar" id = "search" class = "search-label"><strong>Search your artist's name:</strong></label>
         <input id="artist-search" type = "text" name = "search-bar" class = "search-bar" placeholder = "Artist name" autofocus="true">
         <button type = "submit" class = "search-btn button">Search</button>
       </form>
@@ -61,21 +104,11 @@
     <div id="artist-main" class = "columns medium-8 hide">
       <h2 id="artist-name" class="artist-name"></h2>
       <img id="artist-pic" src = "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png" alt = "IT DIDN'T WORK" width = "600" height = "auto" class = "artist-image">
-      <div class = "card bio-card">
+      <div id = "biography" class = "card bio-card">
         <h5 class = "card-divider">Biography:</h5>
         <p id="artist-bio" class = "biography"></p>
     </div>
-      <div class = "card top-songs">
-        <h5 class = "card-divider">Similar Artists:</h5>
-        <ul id="similar-artists" class = "no-bullet list">
-          <li id="sim-art-one"></li>
-          <li id="sim-art-two"></li>
-          <li id="sim-art-three"></li>
-          <li id="sim-art-four"></li>
-          <li id="sim-art-five"></li>
-        </ul>
-    </div>
-      <div class = "card top-songs">
+      <div id = "top-tracks" class = "card top-songs">
         <h5 class = "card-divider">Top Songs:</h5>
         <ul class = "no-bullet list">
           <!--  I added a + button, I also gave each an id class so I could make a function per each-->

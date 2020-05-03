@@ -19,23 +19,81 @@ body, #right, #left, table, .playlist-card {
 	color: #aa4164;
 	position: fixed;
 }
-
 .nav-li {
 	float: right;
 }
 
+
+#modal-login-form, #modal-create-form {
+  background-color: #aa4164;
+  margin: 15% auto;
+  padding:20px;
+  width: 50%;
+}
+.modal-login, .modal-create {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-login {
+	left: 25%;
+	top: 25%;
+	width: 50%;
+}
+
+.modal-create {
+	left: 10%;
+	top: 10%;
+	width: 80%;
+}
+.exit:hover {
+	cursor: pointer;
+}
+
+.exit {
+	float: right;
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+}
+.account-label {
+	color: white;
+}
+
+#login, #create-account, #create-account-create-modal {
+	background-color: #123C69;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.error {
+	display: none;
+	color: #123C69;
+	font-size: 18px;
+	font-weight: bold;
+}
 #header {
 	float: left;
 	font-weight: bold;
 }
-li a {
+li a, #login-nav {
 	display: block;
 	color: #aa4164;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	font-weight: bold;
 }
-li a:hover {
+#login-nav {
+	margin-top: 5px;
+}
+li a:hover, #login-nav:hover {
 	background-color: #123C69;
 	color: white;
 } 
@@ -62,8 +120,9 @@ li a:hover {
 	margin-top: 20px
 }
 
-.search-label {
+label {
 	font-size: 18px;
+	font-weight: bold;
 }
 
 .search-btn {
@@ -137,4 +196,3 @@ li {
 	color: white;
 	font-weight: bold;
 }
-
