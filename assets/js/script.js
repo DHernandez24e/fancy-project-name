@@ -1,6 +1,7 @@
 var formSubmitEl = document.querySelector("#form-submit");
 var artistSearchEl = document.querySelector("#artist-search");
 var pastSearchEl = document.querySelector("#past-search");
+var similarArtistsEl = document.querySelector("#similar-artists")
 var apiKey = "702756dd5f8715a1c44e2754d353c270";
 var historyArr = [];
 var currentUser;
@@ -204,12 +205,12 @@ var ApiCall = function(artist) {
                 //First item from bio Array
                 $("#artist-bio").text(bioArr[0]);
 
-                // //Adding similar artist to a list
-                // $("#sim-art-one").text(data.artist.similar.artist[0].name);
-                // $("#sim-art-two").text(data.artist.similar.artist[1].name);
-                // $("#sim-art-three").text(data.artist.similar.artist[2].name);
-                // $("#sim-art-four").text(data.artist.similar.artist[3].name);
-                // $("#sim-art-five").text(data.artist.similar.artist[4].name);
+                //Adding similar artist to a list
+                $("#sim-art-one").text(data.artist.similar.artist[0].name);
+                $("#sim-art-two").text(data.artist.similar.artist[1].name);
+                $("#sim-art-three").text(data.artist.similar.artist[2].name);
+                $("#sim-art-four").text(data.artist.similar.artist[3].name);
+                $("#sim-art-five").text(data.artist.similar.artist[4].name);
 
         })}
         else {
@@ -269,27 +270,6 @@ var pastSearchHandler = function(artist) {
     localStorage.setItem("artist", JSON.stringify(historyArr));
 
 };
-
-// var simTracksApiHandler = function (mbid) {
-
-//     var tracksApi = "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&mbid="
-//     + mbid + "&api_key="
-//     + apiKey +
-//     "&format=json"
-
-//     fetch(tracksApi).then(function(response) {
-//         response.json().then(function(data){
-
-//             // console.log(data);
-
-//             $("#sim-trk-one").text(data.similartracks.track[0].name);
-//             $("#sim-trk-two").text(data.similartracks.track[1].name);
-//             $("#sim-trk-three").text(data.similartracks.track[2].name);
-//             $("#sim-trk-four").text(data.similartracks.track[3].name);
-//             $("#sim-trk-five").text(data.similartracks.track[4].name);
-//         })
-//     })
-// }
 
 var callBack = function (event) {
 
@@ -483,5 +463,6 @@ localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
 
 formSubmitEl.addEventListener("submit", artistSearch);
 pastSearchEl.addEventListener("click", callBack);
+similarArtistsEl.addEventListener("click", callBack);
 
 loadSearchHistory();
