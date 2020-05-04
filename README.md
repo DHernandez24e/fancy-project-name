@@ -19,6 +19,7 @@ Start by loginning in and creating your profile.  By using the search bar you ca
 
 ![After Search](https://github.com/DHernandez24e/search-the-sound/blob/master/pic2.png)
 
+![Playlist Pic](https://github.com/DHernandez24e/search-the-sound/blob/master/pic3.PNG)
 
 Deployed Site: https://dhernandez24e.github.io/search-the-sound/
 
