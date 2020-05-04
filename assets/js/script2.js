@@ -13,5 +13,8 @@ $(window).on("load", function() {
             .text(songsToAddList[i]);
             $("#playlist").append(newSong);
         }
+
+        $("#playlist").sortable().append(newSong);
+        $("#playlist").disableSelection();
     }
 })
