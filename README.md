@@ -2,7 +2,7 @@ Search the Sound!
 
 Interactive playlist builder that allows you to create playlist of top songs from your favorite artists as well as get information on others that you might enjoy!
 
-Deployed Site: 
+Deployed Site: https://dhernandez24e.github.io/search-the-sound/
 
 Features:
 - Search artists to get their picture, bio, top tracks, and similar artists in search results.
