@@ -1,4 +1,5 @@
 $(window).on("load", function() {
+    debugger;
     if (localStorage.getItem(localStorage.getItem("currentUser") + "playlist") == "") {
         return;
     } else {
@@ -11,10 +12,9 @@ $(window).on("load", function() {
             newSong = $("<li>")
             .addClass("playlist-song")
             .text(songsToAddList[i]);
-            $("#playlist").append(newSong);
+            $("#playlist").sortable().append(newSong);
         }
-
-        $("#playlist").sortable().append(newSong);
-        $("#playlist").disableSelection();
+        
+        // $("#playlist").disableSelection();
     }
 })
