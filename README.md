@@ -31,4 +31,4 @@ How It's Done:
 
 By using an API key we were able to gather the infomation based on the search critiea of each site.  API key not listed as to protect information from being hacked.  Combine that with jquery with were able to saved data  to the local storage and pull it to the page using JSON and stringify.  By combining jquery and foundation we were able to create a clean and effective UI, including search bar, login, and interactive buttons that take you to your playlist page. 
 
-Github Repository: 
+Github Repository: https://github.com/DHernandez24e/search-the-sound
