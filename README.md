@@ -13,6 +13,9 @@ Features:
 
 Product
 
+![Site Pre-Search](https://github.com/DHernandez24e/search-the-sound/blob/master/pic1.PNG)
+
+![After Search](https://github.com/DHernandez24e/search-the-sound/blob/master/pic2.png)
 
 
 API Used and the following information pulled from each site:
