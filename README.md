@@ -11,6 +11,10 @@ Features:
 - User Login, and personalize playlist
 - Adjust Tracks on playlist 
 
+Product
+
+
+
 API Used and the following information pulled from each site:
 
 LastFM:
