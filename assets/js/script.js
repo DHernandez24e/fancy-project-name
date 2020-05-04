@@ -22,6 +22,7 @@ function showHero() {
 }
 var loginNavBtn = $("#login-nav");
 
+//Checks if current user is signed in, if not, sign in option is displayed
 $(window).on("load", function() {
 if (localStorage.getItem("currentUser") != "guest") {
 loginNavBtn.text("Sign Out");
@@ -30,6 +31,7 @@ loginNavBtn.text("Sign Out");
 var modalLogin = $("#modal-login");
 var exitBtnLogin = $(".exit").eq(0);
 
+//Changes functionality if user is signed in
 loginNavBtn.on("click", function() {
 if (loginNavBtn.text() == "Login") {
 modalLogin.show();
@@ -41,11 +43,12 @@ localStorage.setItem("currentUser", "guest");
 }
 })
 
+//Hides sign in modal
 exitBtnLogin.on("click", function() {
 modalLogin.hide();
 })
 
-
+//Modal for user log in
 var loginBtn = $("#login");
 var usernameBoxLogin = $("#username-box-login");
 var passwordBoxLogin = $("#password-box-login");
@@ -81,6 +84,7 @@ loginNavBtn.text("Login");
 }
 })
 
+//Account creation sign-in, only local
 var createAccount = $('#create-account');
 var modalCreate = $("#modal-create");
 var exitBtnCreate = $(".exit").eq(1);
@@ -139,6 +143,7 @@ localStorage.setItem(localStorage.getItem("currentUser") + "password", passwordC
 loginNavBtn.text("Sign out");
 localStorage.setItem(localStorage.getItem("currentUser") + "playlist", "");
 })
+
 //
 var artistSearch = function(input) {
     //Prevent page from reloading
@@ -310,7 +315,9 @@ var loadSearchHistory = function() {
     };
 };
 
-//Each button has a corresponding function, I just <p>, as a test to see where the information was going when the button was clicked
+//Buttons functionality for adding songs to playlist
+//Each button has a corresponding function, with varying if/else statements depending if guest or signed in user
+//Global variables set for the functions
 var songName;
 var localStorageList;
 var localStorageListStr
@@ -320,176 +327,152 @@ $(document).ready(function() {
         var index = parseInt($(this).attr("id"))
         songName = $(".top-track-list").eq(index - 1).text();
         if (localStorage.getItem("currentUser") == "guest") {
-        if (localStorage.getItem("guestplaylist") == null) {
-localStorageList = [songName]
-localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            if (localStorage.getItem("guestplaylist") == null) {
+                localStorageList = [songName]
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            } else {
+                localStorageListStr = localStorage.getItem("guestplaylist");
+                if (localStorageListStr == "") {
+                    localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem("guestplaylist")
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            }
         } else {
-        localStorageListStr = localStorage.getItem("guestplaylist");
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem("guestplaylist")
-        localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
-        }
-        } else {
-        localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
-        localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
-        }
-       
-      });
+            localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
+            if (localStorageListStr == "") {
+                localStorageList = [songName]
+            } else {
+                localStorageList = JSON.parse(localStorageListStr)
+                localStorageList.push(songName)
+            }
+            localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
+            localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
+        }});
 
     $("#2").click(function(){
         var index = parseInt($(this).attr("id"))
         songName = $(".top-track-list").eq(index - 1).text();
         if (localStorage.getItem("currentUser") == "guest") {
-        if (localStorage.getItem("guestplaylist") == null) {
-localStorageList = [songName]
-localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            if (localStorage.getItem("guestplaylist") == null) {
+                localStorageList = [songName]
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            } else {
+                localStorageListStr = localStorage.getItem("guestplaylist");
+                if (localStorageListStr == "") {
+                    localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem("guestplaylist")
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            }
         } else {
-        localStorageListStr = localStorage.getItem("guestplaylist");
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem("guestplaylist")
-        localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
-        }
-        } else {
-        localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
-        localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
-        }
-
-      });
+            localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
+            if (localStorageListStr == "") {
+                localStorageList = [songName]
+            } else {
+                localStorageList = JSON.parse(localStorageListStr)
+                localStorageList.push(songName)
+            }
+            localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
+            localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
+        }});
 
     $("#3").click(function(){
         var index = parseInt($(this).attr("id"))
         songName = $(".top-track-list").eq(index - 1).text();
         if (localStorage.getItem("currentUser") == "guest") {
-        if (localStorage.getItem("guestplaylist") == null) {
-localStorageList = [songName]
-localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            if (localStorage.getItem("guestplaylist") == null) {
+                localStorageList = [songName]
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            } else {
+                localStorageListStr = localStorage.getItem("guestplaylist");
+                if (localStorageListStr == "") {
+                    localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem("guestplaylist")
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            }
         } else {
-        localStorageListStr = localStorage.getItem("guestplaylist");
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem("guestplaylist")
-        localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
-        }
-        } else {
-        localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
-        localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
-        }
-      });
+            localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
+            if (localStorageListStr == "") {
+                localStorageList = [songName]
+            } else {
+                localStorageList = JSON.parse(localStorageListStr)
+                localStorageList.push(songName)
+            }
+            localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
+            localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
+        }});
    
     $("#4").click(function(){
         var index = parseInt($(this).attr("id"))
         songName = $(".top-track-list").eq(index - 1).text();
         if (localStorage.getItem("currentUser") == "guest") {
-        if (localStorage.getItem("guestplaylist") == null) {
-localStorageList = [songName]
-localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            if (localStorage.getItem("guestplaylist") == null) {
+                localStorageList = [songName]
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            } else {
+                localStorageListStr = localStorage.getItem("guestplaylist");
+                if (localStorageListStr == "") {
+                    localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem("guestplaylist")
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            }
         } else {
-        localStorageListStr = localStorage.getItem("guestplaylist");
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem("guestplaylist")
-        localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
-        }
-        } else {
-        localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
-        localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
-        }
-      });
+            localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
+            if (localStorageListStr == "") {
+                localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
+                localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
+        }});
 
     $("#5").click(function(){
         var index = parseInt($(this).attr("id"))
         songName = $(".top-track-list").eq(index - 1).text();
         if (localStorage.getItem("currentUser") == "guest") {
-        if (localStorage.getItem("guestplaylist") == null) {
-localStorageList = [songName]
-localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            if (localStorage.getItem("guestplaylist") == null) {
+                localStorageList = [songName]
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            } else {
+                localStorageListStr = localStorage.getItem("guestplaylist");
+                if (localStorageListStr == "") {
+                    localStorageList = [songName]
+                } else {
+                    localStorageList = JSON.parse(localStorageListStr)
+                    localStorageList.push(songName)
+                }
+                localStorage.removeItem("guestplaylist")
+                localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
+            }
         } else {
-        localStorageListStr = localStorage.getItem("guestplaylist");
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem("guestplaylist")
-        localStorage.setItem("guestplaylist", JSON.stringify(localStorageList))
-        }
-        } else {
-        localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
-        if (localStorageListStr == "") {
-        localStorageList = [songName]
-        } else {
-        localStorageList = JSON.parse(localStorageListStr)
-        localStorageList.push(songName)
-        }
-        localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
-        localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
-        }
-      });
+            localStorageListStr = localStorage.getItem(localStorage.getItem("currentUser") + "playlist")
+            if (localStorageListStr == "") {
+                localStorageList = [songName]
+            } else {
+                localStorageList = JSON.parse(localStorageListStr)
+                localStorageList.push(songName)
+            }
+            localStorage.removeItem(localStorage.getItem("currentUser") + "playlist")
+            localStorage.setItem(localStorage.getItem("currentUser") + "playlist", JSON.stringify(localStorageList))
+        }});
   });
-
-//Makes playlist adjustable change top tracks 
-
-$( function() {
-  $( "#sortable" ).sortable();
-  $( "#sortable" ).disableSelection();
-
-});
-
-//saves to local storage
-
-var ar = []
-ar = document.getElementById("sortable").getElementsByTagName("li");
-
-for(i = 0; i < ar.length; i++){
-  localStorage.setItem("tracks", JSON.stringify(($(ar[i]).text())));
-}
 
 
 formSubmitEl.addEventListener("submit", artistSearch);
