@@ -10,7 +10,8 @@ Features:
 - Adjust Tracks on playlist 
 
 
-#Product Description
+#Product Description:
+
 Start by loginning in and creating your profile.  By using the search bar you can look for your favorite artist. The search will result show artist picture, bio, similar artists, and top tracks. From there you can add tracks to your playlist, by clicking the button next to the songs.  Below you can either go to your playlist by clicking the button below or continue to search for other artist.  You can also go to previously searched for artist by clicking on the artist name below the search bar.  On the playlist it will list all the songs that you've added.  You can change the playlist by clicking on the song and moving it to where you want it. 
 
 
